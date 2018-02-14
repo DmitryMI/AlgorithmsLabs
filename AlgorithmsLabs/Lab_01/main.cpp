@@ -54,6 +54,8 @@ int main(void)
 	std::cout << "Input X argument: ";
 	std::cin >> argX;
 
+	printf("\n");
+
 	if (argN > POINT_NUMBER)
 	{
 		printf("Not enough points in table to proceed.\n");
@@ -83,7 +85,7 @@ int main(void)
 			offset_left += -pos - offset_right;
 			offset_right += -pos - offset_right;
 		}
-		printf("Offset right: %d, pos: %d, offset_left: %d\n", offset_right, pos, offset_left);
+		//printf("Offset right: %d, pos: %d, offset_left: %d\n", offset_right, pos, offset_left);
 
 		if (pos + offset_left > POINT_NUMBER - 1)
 		{
@@ -96,9 +98,9 @@ int main(void)
 		{			
 			x_pol[j] = x[i];
 			y_pol[j] = y[i];
-			printf("i = %d, x = %3.3f, y = %3.3f\n", i, x_pol[j], y_pol[j]);
+			//printf("i = %d, x = %3.3f, y = %3.3f\n", i, x_pol[j], y_pol[j]);
 		}
-		NeutonPolinom polinom = NeutonPolinom(f, argN, x_pol, y_pol);
+		NeutonPolinom polinom = NeutonPolinom(argN, x_pol, y_pol);
 		double result = polinom.Calculate(argX);
 		printf("Interpolated F(X) = %3.3f\n", result);
 	}

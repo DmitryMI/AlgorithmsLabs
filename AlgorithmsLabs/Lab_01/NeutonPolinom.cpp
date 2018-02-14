@@ -3,13 +3,15 @@
 #include <stdio.h>
 #include "NeutonPolinom.h"
 
+#define DEVDIFF_RECURSIVELY
+
 NeutonPolinom::NeutonPolinom(func_t func, int n, double *x_arr, double *y_arr)
 {
 	function = func;
 	N = n;
-	xValues = (double*)malloc(sizeof(double)* n);
-	yValues = (double*)malloc(sizeof(double)* n);
-	for (int i = 0; i < n; i++)
+	xValues = (double*)malloc(sizeof(double)* (n + 1));
+	yValues = (double*)malloc(sizeof(double)* (n + 1));
+	for (int i = 0; i < n + 1; i++)
 	{
 		xValues[i] = x_arr[i];
 		yValues[i] = y_arr[i];
@@ -23,6 +25,7 @@ NeutonPolinom::~NeutonPolinom()
 	free(yValues);
 }
 
+#ifdef DEVDIFF_RECURSIVELY
 double NeutonPolinom::DevidedDifference(int count, double* args)
 {
 	if (count < 2)
@@ -74,12 +77,15 @@ double NeutonPolinom::DevidedDifferenceIndexated(int count, int* argsInd)
 	free(y2_args);
 	return result;
 }
+#else
+
+#endif
 
 
 double NeutonPolinom::Calculate(double x)
 {
 	double result = 0;
-	for (int k = 0; k < N; k++)
+	for (int k = 0; k < N + 1; k++)
 	{
 		if (k == 0)
 		{
@@ -95,7 +101,7 @@ double NeutonPolinom::Calculate(double x)
 			x_diff_args[i + 1] = i + 1;
 		}
 		double dev_diff = DevidedDifferenceIndexated(k + 1, x_diff_args);
-		//printf("dev_diff: %3.4f\n", dev_diff);
+		printf("dev_diff: %3.4f\n", dev_diff);
 		addendum *= dev_diff;
 		result += addendum;
 		free(x_diff_args);

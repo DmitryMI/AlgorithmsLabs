@@ -76,6 +76,11 @@ double NeutonPolinom::DevidedDifferenceIndexated(int count, int start, int* args
 double NeutonPolinom::Calculate(double x)
 {
 	double result = 0;
+	int *x_diff_args = (int*)malloc(sizeof(int)* (N + 1));
+	x_diff_args[0] = 0;
+	for (int i = 0; i < N; i++)
+		x_diff_args[i + 1] = i + 1;
+
 	for (int k = 0; k < N + 1; k++)
 	{
 		if (k == 0)
@@ -83,20 +88,16 @@ double NeutonPolinom::Calculate(double x)
 			result += yValues[0];
 			continue;
 		}
-		int *x_diff_args = (int*)malloc(sizeof(int)* (k + 1));
-		x_diff_args[0] = 0;
+		
 		double addendum = 1;
-		for (int i = 0; i < k; i++)
-		{
-			addendum *= x - xValues[i];
-			x_diff_args[i + 1] = i + 1;
-		}
+		for (int i = 0; i < k; i++)		
+			addendum *= x - xValues[i];			
+		
 		double dev_diff = DevidedDifferenceIndexated(k + 1, 0, x_diff_args);
-		//printf("dev_diff: %3.4f\n", dev_diff);
 		addendum *= dev_diff;
-		result += addendum;
-		free(x_diff_args);
+		result += addendum;		
 	}
+	free(x_diff_args);
 	return result;
 }
 

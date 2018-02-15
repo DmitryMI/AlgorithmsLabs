@@ -14,8 +14,8 @@
 
 double f(double x)
 {
-	//return sin(M_PI / 6 * x);
-	return x * x * x;
+	return sin(M_PI / 6 * x);
+	//return x * x * x;
 }
 
 void GenerateTable(double *x, double *y)
@@ -103,10 +103,10 @@ int main(void)
 		}
 		NeutonPolinom polinom = NeutonPolinom(argN, x_pol, y_pol);
 		double result = polinom.Calculate(argX);
-		printf("Interpolated F(X) = %3.3f\n", result);
+		printf("Interpolated F(X) = %3.6f\n", result);
 	}
 
-	printf("Actual F(X) = %3.3f\n", f(argX));
+	printf("Actual F(X) = %3.6f\n", f(argX));
 
 	_getch();
 }

@@ -14,7 +14,8 @@
 
 double f(double x)
 {
-	return sin(M_PI / 6 * x);
+	//return sin(M_PI / 6 * x);
+	return x * x * x;
 }
 
 void GenerateTable(double *x, double *y)

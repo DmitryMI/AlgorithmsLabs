@@ -24,34 +24,52 @@ NeutonPolinom::~NeutonPolinom()
 	free(yValues);
 }
 
+void PrintArrays(double *x, double *y, int count)
+{
+	printf("X: ");
+	for (int i = 0; i < count; i++)
+	{
+		printf("%3.3f ", x[i]);
+	}
+	printf("\nY: ");
+	for (int i = 0; i < count; i++)
+	{
+		printf("%3.3f ", y[i]);
+	}
+	printf("\n\n");
+}
+
 #ifdef DEVDIFF_RECURSIVELY
-double NeutonPolinom::DevidedDifferenceIndexated(int count, int* argsInd)
+double NeutonPolinom::DevidedDifferenceIndexated(int count, int start, int* argsInd)
 {
 	if (count < 2)
-		return yValues[argsInd[0]];
+		return yValues[argsInd[start + 0]];
 
-	if (count == 2)
-	{
-		return (yValues[argsInd[1]] - yValues[argsInd[0]]) / (xValues[argsInd[1]] - xValues[argsInd[0]]);
-	}
-
-	int *y1_args = (int*)malloc(sizeof(int)* (count - 1));
-	int *y2_args = (int*)malloc(sizeof(int)* (count - 1));
-	for (int i = 0; i < count - 1; i++)
-	{
-		y1_args[i] = argsInd[i + 1];
-	}
-	for (int i = 0; i < count - 1; i++)
-	{
-		y2_args[i] = argsInd[i];
-	}
-	double result = (DevidedDifferenceIndexated(count - 1, y1_args) - DevidedDifferenceIndexated(count - 1, y2_args)) / (xValues[argsInd[count - 1]] - xValues[argsInd[0]]);
-	free(y1_args);
-	free(y2_args);
-	return result;
+	if (count == 2)	
+		return (yValues[argsInd[start + 1]] - yValues[argsInd[start + 0]]) / (xValues[argsInd[start + 1]] - xValues[argsInd[start + 0]]);
+	
+	return (DevidedDifferenceIndexated(count - 1, start + 1, argsInd) - DevidedDifferenceIndexated(count - 1, start, argsInd)) / (xValues[argsInd[count - 1]] - xValues[argsInd[0]]);
 }
 #else
-
+double NeutonPolinom::DevidedDifferenceIndexated(int count, int start, int* argsInd)
+{
+	double *values = (double*)malloc(sizeof(double)* count);
+	for (int i = 0; i < count; i++)
+	{
+		values[i] = yValues[argsInd[i]];
+	}
+	PrintArrays(xValues, values, count);
+	for (int k = 1; k < count + 1; k++)
+	{
+		for (int i = 0; i < count - k; i++)
+		{
+			values[i] = (values[i] - values[i + 1]) / (xValues[argsInd[i]] - xValues[argsInd[count - k]]);
+		}		
+		//PrintArrays(xValues, values, count);
+	}
+	printf("%3.3f\n", values[0]);
+	return values[0];
+}
 #endif
 
 
@@ -73,7 +91,7 @@ double NeutonPolinom::Calculate(double x)
 			addendum *= x - xValues[i];
 			x_diff_args[i + 1] = i + 1;
 		}
-		double dev_diff = DevidedDifferenceIndexated(k + 1, x_diff_args);
+		double dev_diff = DevidedDifferenceIndexated(k + 1, 0, x_diff_args);
 		//printf("dev_diff: %3.4f\n", dev_diff);
 		addendum *= dev_diff;
 		result += addendum;

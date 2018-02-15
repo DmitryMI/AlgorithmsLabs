@@ -8,7 +8,7 @@ public:
 
 	double Calculate(double x);
 
-	double DevidedDifferenceIndexated(int count, int *argsInd);
+	double DevidedDifferenceIndexated(int count, int start, int *argsInd);
 
 private:
 	int N;

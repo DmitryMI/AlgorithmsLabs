@@ -24,12 +24,18 @@
     <ClCompile Include="BinarySearch.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="Lerp.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NeutonPolinom.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="BinarySearch.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Lerp.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

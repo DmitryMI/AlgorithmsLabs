@@ -65,11 +65,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BinarySearch.cpp" />
+    <ClCompile Include="Lerp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NeutonPolinom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinarySearch.h" />
+    <ClInclude Include="Lerp.h" />
     <ClInclude Include="NeutonPolinom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

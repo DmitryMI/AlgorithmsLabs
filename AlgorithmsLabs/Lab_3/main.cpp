@@ -13,13 +13,13 @@
 #include <math.h>
 #include <iostream>
 
-#define X_INITIAL -3.0f
-#define POINT_NUMBER 10
-#define POINT_STEP_X 2
+#define X_INITIAL 0
+#define POINT_NUMBER 20
+#define POINT_STEP_X 0.25f
 
 double f(double x)
 {
-	//return sin(M_PI / 6 * x);
+	//return sin(x);
 	//return 6*sin(x)*log(x+5)/(x+5);
 	return x*x*x - 1.5;
 	//return cos(x) - x;
@@ -41,7 +41,7 @@ void PrintTable(double *x, double *y)
 	printf("====VALUE TABLE====\n");
 	for (int i = 0; i < POINT_NUMBER; i++)
 	{
-		printf("%7.3f   %7.3f\n", x[i], y[i]);
+		printf("%2.2d: %7.3f   %7.3f\n", i, x[i], y[i]);
 	}
 	printf("===================\n");
 }
@@ -63,6 +63,13 @@ int main(void)
 		printf("Extrapolation is restricted!\n");
 		_getch();
 		return - 1;
+	}
+
+	if (x > table_x[POINT_NUMBER - 2])
+	{
+		printf("Impossible to build spline basing on this point!\n");
+		_getch();
+		return -1;
 	}
 
 	Spline spline = Spline(table_x, table_y, POINT_NUMBER);

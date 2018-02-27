@@ -9,14 +9,15 @@
 #include "iostream"
 #include "Lerp.h"
 
-#define X_INITIAL -5.0f
-#define POINT_NUMBER 20
-#define POINT_STEP_X 1
+#define X_INITIAL -3.0f
+#define POINT_NUMBER 10
+#define POINT_STEP_X 2
 
 double f(double x)
 {
 	//return sin(M_PI / 6 * x);
-	return exp(x) - 1.5;
+	//return exp(x) - 1.5;
+	return x * x * x - 1.5;
 	//return cos(x) - x;
 }
 

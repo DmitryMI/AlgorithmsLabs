@@ -16,6 +16,10 @@ Spline::~Spline()
 {
 	free(pnt_x);
 	free(pnt_y);
+	free(a);
+	free(b);
+	free(c);
+	free(d);
 }
 
 void print_arr(char *title, double *arr, int len)
@@ -28,7 +32,7 @@ void print_arr(char *title, double *arr, int len)
 	printf("\n");
 }
 
-void Spline::Calculate—oefficients()
+void Spline::calculate_coefficients()
 {
 	int steps = point_amount;
 	a = (double*)malloc(sizeof(double)* (steps));
@@ -45,8 +49,10 @@ void Spline::Calculate—oefficients()
 	n[1] = 0;	
 	for (int i = 1; i < steps; i++)
 	{
-		n[i + 1] = (F(i) + A(i) * n[i]) / (B(i) - A(i) * e[i]);
-		e[i + 1] = D(i) / (B(i) - A(i) * e[i]);
+		double Ai = A(i);
+		double devider = (B(i) - Ai * e[i]);
+		n[i + 1] = (F(i) + Ai * n[i]) / devider;
+		e[i + 1] = D(i) / devider;
 	}
 
 	// Œ·‡ÚÌ˚È ıÓ‰
@@ -58,13 +64,12 @@ void Spline::Calculate—oefficients()
 	// ¬˚˜ËÒÎËÏ a, b, d ÔÓ Ì‡È‰ÂÌÌ˚Ï c
 	a[0] = 0;
 	b[0] = 0;
-	for (int i = 0; i < steps; i++)
+	//d[0] = (c[1] - c[0]) / 3 / h(0);
+	d[0] = 0;
+	for (int i = 1; i < steps; i++)
 	{
-		if (i != 0)
-		{
-			a[i] = pnt_y[i - 1];
-			b[i] = pnt_y[i] - pnt_y[i - 1] - h(i)*(c[i + 1] + 2 * c[i]) / 3;
-		}
+		a[i] = pnt_y[i - 1];
+		b[i] = pnt_y[i] - pnt_y[i - 1] - h(i)*(c[i + 1] + 2 * c[i]) / 3;
 		d[i] = (c[i + 1] - c[i]) / 3 / h(i);
 	}
 	d[steps - 1] = -c[steps - 1] / 3 / h(steps - 1);
@@ -87,7 +92,7 @@ Spline::Spline(double* x, double* y, int count)
 		pnt_x[i] = x[i];
 		pnt_y[i] = y[i];
 	}
-	Calculate—oefficients();
+	calculate_coefficients();
 }
 
 double Spline::calculate(double x)

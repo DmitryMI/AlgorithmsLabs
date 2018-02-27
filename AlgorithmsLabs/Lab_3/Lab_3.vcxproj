@@ -11,9 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{21CF9FBA-07EE-4C00-A28F-EF003990BAE1}</ProjectGuid>
-    <RootNamespace>Lab_02</RootNamespace>
-    <ProjectName>Lab_1.5</ProjectName>
+    <ProjectGuid>{6AB6AB8F-062F-4514-87F3-8B56C3DBA46F}</ProjectGuid>
+    <RootNamespace>Lab_3</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -65,17 +64,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lab_01\BinarySearch.h" />
-    <ClInclude Include="..\Lab_01\Lerp.h" />
-    <ClInclude Include="..\Lab_01\NeutonPolinom.h" />
-    <ClInclude Include="Lerpnd.h" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Spline.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Lab_01\BinarySearch.cpp" />
-    <ClCompile Include="..\Lab_01\Lerp.cpp" />
-    <ClCompile Include="..\Lab_01\NeutonPolinom.cpp" />
-    <ClCompile Include="lerpnd.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="Spline.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

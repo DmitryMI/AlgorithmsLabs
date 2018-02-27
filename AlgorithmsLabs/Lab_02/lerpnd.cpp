@@ -22,9 +22,5 @@ double lerpnd(matrix_t* values, double* arguments, int* degrees, int curarg)
 			break;
 	}
 
-	// Выберем N различных значений для предидущего аргумента
-	z_vals[]
-	
-
 	return lerp1d(y_vals, z_vals, arguments[curarg], degrees[curarg]);
 }

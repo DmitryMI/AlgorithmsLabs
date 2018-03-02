@@ -22,9 +22,8 @@ public:
 
 	Table(int size);
 
-	double Get(int i, int j);
-
 	double GetZ(double x, double y);
+
 	~Table();
 
 	void GenerateTable(func f, double init_x, double init_y, double step);

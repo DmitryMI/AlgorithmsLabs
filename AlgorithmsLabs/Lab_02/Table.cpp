@@ -35,18 +35,16 @@ int Table::get_size()
 Table::Table(int size)
 {
 	this->size = size;
-	data = (double**)malloc(sizeof(double*)* size);
+	data = (double**)malloc(sizeof(double*) * size);
 	for (int i = 0; i < size; i++)
 	{
-		data[i] = (double*)malloc(sizeof(double)* size);
+		data[i] = (double*)malloc(sizeof(double) * size);
 	}
-	x_args = (double*)malloc(sizeof(double)* size);
-	y_args = (double*)malloc(sizeof(double)* size);
-}
-
-double Table::Get(int i, int j)
-{
-	return data[i][j];
+	x_args = (double*)malloc(sizeof(double) * size);
+	y_args = (double*)malloc(sizeof(double) * size);
+	init_x = 0;
+	init_y = 0;
+	step_arg = 0;
 }
 
 double Table::GetZ(double x, double y)
@@ -58,13 +56,13 @@ double Table::GetZ(double x, double y)
 
 Table::~Table()
 {
-	for (int i = 0; i < size; i++)
+	/*for (int i = 0; i < size; i++)
 	{
 		free(data[i]);
 	}
 	free(data);
 	free(x_args);
-	free(y_args);
+	free(y_args);*/
 }
 
 void Table::GenerateTable(func f, double init_x, double init_y, double step)

@@ -44,14 +44,16 @@ void Spline::calculate_coefficients()
 	double *e = (double*)malloc(sizeof(double) * (steps + 1));
 	double *n = (double*)malloc(sizeof(double) * (steps + 1));
 
-	e[1] = -B(0)/D(0);
-	n[1] = F(0)/D(0);	
-	for (int i = 1; i < steps; i++)
+	//e[2] = -B(0)/D(0);
+	//n[2] = F(0)/D(0);	
+	e[2] = 0;
+	n[2] = 0;
+	for (int i = 2; i < steps; i++)
 	{
 		double Ai = A(i);
 		double devider = (B(i) + Ai * e[i]); // -
 		n[i + 1] = (F(i) - Ai * n[i]) / devider; // +
-		e[i + 1] = -D(i) / devider; // +
+		e[i + 1] = -D(i) / devider; //. +
 	}
 
 	// Обратный ход
@@ -79,7 +81,7 @@ void Spline::calculate_coefficients()
 
 Spline::Spline(double* x, double* y, int count)
 {
-	if (count < 3)	
+	if (count < 2)	
 		throw std::invalid_argument("Not enough points to create a spline");
 	
 	point_amount = count;
@@ -105,10 +107,9 @@ double Spline::calculate(double x)
 		if (pnt_x[i-1] < x && x < pnt_x[i])
 			break;
 	}
-	printf("i = %d\n", i);
+	//printf("i = %d\n", i);
 	double h = (x - pnt_x[i - 1]);
 	//printf("h = %3.3f\n", h);
-	double tmp = h;
 	double res =
 		a[i] +
 		b[i] * h +

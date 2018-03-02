@@ -14,8 +14,8 @@
 #include <iostream>
 
 #define X_INITIAL 0
-#define POINT_NUMBER 20
-#define POINT_STEP_X 0.25f
+#define POINT_NUMBER 15
+#define POINT_STEP_X 1.0f
 
 double f(double x)
 {
@@ -65,19 +65,21 @@ int main(void)
 		return - 1;
 	}
 
-	if (x > table_x[POINT_NUMBER - 2])
+	try
 	{
-		printf("Impossible to build spline basing on this point!\n");
+		Spline spline = Spline(table_x, table_y, POINT_NUMBER);
+		double y = spline.calculate(x);
+		printf("Result: %3.7f\n", y);
+		printf("Actual result: %3.7f\n", f(x));
+
+		_getch();
+		return 0;
+	}
+	catch (std::invalid_argument)
+	{
+		printf("Invalid size of table.\n");
 		_getch();
 		return -1;
 	}
-
-	Spline spline = Spline(table_x, table_y, POINT_NUMBER);
-
-	double y = spline.calculate(x);
-	printf("Result: %3.3f\n", y);
-	printf("Actual result: %3.3f\n", f(x));
-
-	_getch();
-	return 0;
+	
 }

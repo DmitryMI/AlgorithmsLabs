@@ -1,72 +1,56 @@
-#define _CRT_SECURE_NO_WARNINGS
-
-#include <iostream>
-#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <conio.h>
+#include "Lerp2D.h"
 
-#define POINT_NUMBER 30
-#define SECTION_NUMBER 6
-#define INIT_X 0
-#define INIT_Y 0
-#define X_STEP 1
-#define Y_STEP 1
+#include "Table.h"
+#include <iostream>
 
-#define RAND(min, max) (float)rand() / RAND_MAX * (max - min) + min
+#define TABLE_SIZE 6
+#define INIT_ARG 0
+#define ARG_STEP 1
 
-double func(double x, double y)
+double f(double x, double y)
 {
 	return x*x + y*y;
 }
 
-void PrintTable(double *x, double *y, double *z)
-{
-	printf("======= VALUE TABLE =======\n");
-	//printf("x")
-	for (int i = 0; i < POINT_NUMBER; i++)
-	{
-		printf("%7.3f   %7.3f   %7.3f\n", x[i], y[i], z[i]);
-	}
-	printf("===========================\n");
-}
-
-void GenerateTable(double *x, double *y, double *z)
-{
-	for (int j = 0; j < POINT_NUMBER / SECTION_NUMBER; j++)
-	{
-		int offset = j * SECTION_NUMBER;
-
-		if (j == 0)
-		{
-			x[offset] = INIT_X;		
-		}
-		else
-		{
-			x[offset] = x[offset - SECTION_NUMBER] + X_STEP;
-		}
-		y[offset] = INIT_Y;
-		z[offset] = func(x[offset], y[offset]);
-		for (int i = 1; i < SECTION_NUMBER; i++)
-		{			
-			int shift = offset + i;
-			x[shift] = x[shift - 1];
-			y[shift] = y[shift - 1] + Y_STEP;
-			z[shift] = func(x[shift], y[shift]);
-		}
-	}
-}
-
 int main(void)
 {
-	srand(time(NULL));
+	Table table = Table(TABLE_SIZE);
+	table.GenerateTable(f, INIT_ARG, INIT_ARG, ARG_STEP);
+	table.PrintTable();
 
-	double x[POINT_NUMBER];
-	double y[POINT_NUMBER];
-	double z[POINT_NUMBER];
+	int nX, nY;
+	double x, y;
+	printf("Input Nx: \n");
+	std::cin >> nX;
+	if (nX >= TABLE_SIZE)
+	{
+		printf("Not enough points\n");
+		_getch();
+		return -1;
+	}
+	printf("Input Ny: \n");
+	std::cin >> nY;
+	if (nY >= TABLE_SIZE)
+	{
+		printf("Not enough points\n");
+		_getch();
+		return -1;
+	}
+	printf("Input X argument: \n");
+	std::cin >> x;
+	printf("Input Y argument: \n");
+	std::cin >> y;
 
-	GenerateTable(x, y, z);
-	PrintTable(x, y, z);
-
-
+	
+	double result = Lerp2D(table, x, y, nX, nY);
+	double actual = f(x, y);
+	
+	printf("Result: %3.7f\n", result);
+	printf("Actual result: %3.7f\n", actual);
 
 	_getch();
+	return 0;
 }

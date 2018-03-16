@@ -91,13 +91,13 @@ void Table::PrintTable()
 	printf("y\\x  ");
 	for (int i = 0; i < size; i++)
 	{
-		printf("%5.4d ", i);
+		printf("%5.1d ", i);
 	}
 	printf("\n");
 
 	for (int i = 0; i < size; i++)
 	{
-		printf("%4.4d ", i);
+		printf("%4.1d ", i);
 		for (int j = 0; j < size; j++)
 		{
 			printf("%5.2f ", data[i][j]);

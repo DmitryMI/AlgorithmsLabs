@@ -13,6 +13,7 @@
 double f(double x, double y)
 {
 	return x*x + y*y;
+	//return sin(x) * y;
 }
 
 int main(void)
@@ -20,6 +21,7 @@ int main(void)
 	Table table = Table(TABLE_SIZE);
 	table.GenerateTable(f, INIT_ARG, INIT_ARG, ARG_STEP);
 	table.PrintTable();
+
 
 	int nX, nY;
 	double x, y;
@@ -44,13 +46,14 @@ int main(void)
 	printf("Input Y argument: \n");
 	std::cin >> y;
 
-	
+
 	double result = Lerp2D(table, x, y, nX, nY);
 	double actual = f(x, y);
-	
+
 	printf("Result: %3.7f\n", result);
 	printf("Actual result: %3.7f\n", actual);
 
 	_getch();
+
 	return 0;
 }

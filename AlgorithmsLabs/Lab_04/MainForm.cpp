@@ -2,31 +2,29 @@
 #include "MainForm.h"
 #include <stdlib.h>
 #include <time.h>
+#include <cmath>
+#include "OlsInterpolator.h"
 
-#define RND_01 ((float)rand() / (float)RAND_MAX)
-#define RND_RANGE(min, max) ((RND_01) * (max - min) + min)
 #define POINT_SIZE 4
 #define POINT_COLOR Color::Red
-#define Y_INTERFERENCE 10.0f
+#define Y_INTERFERENCE 3.0
 
 namespace Lab_03
 {	
 
-	float genFunc(float x)
+	double fi(double x, int k)
 	{
-		return x * x;
-	}
-	
-	void MainForm::free_table(Table *t)
-	{
-		if (t == NULL)
-			return;
-		free(t->x);
-		free(t->y);
-		free(t->weight);
-		free(t);
+		double res = 1;
+		for (int i = 0; i < k; i++)
+			res *= x;
+		return res;
 	}
 
+	float genFunc(float x)
+	{
+		return x;
+	}
+	
 	void MainForm::ConstructTable()
 	{
 		free_table(table);
@@ -34,9 +32,10 @@ namespace Lab_03
 		if (pointDataGrid->RowCount <= 0)
 			return;
 		table = (Table*)malloc(sizeof(Table));
-		table->x = (float*)malloc(sizeof(float)* pointDataGrid->RowCount);
-		table->y = (float*)malloc(sizeof(float)* pointDataGrid->RowCount);;
-		table->weight = (float*)malloc(sizeof(float)* pointDataGrid->RowCount);
+		table->x = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
+		table->y = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
+		table->weight = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
+		table->size = (pointDataGrid->RowCount - 1);
 		try
 		{
 			for (int i = 0; i < pointDataGrid->RowCount - 1; i++)
@@ -59,20 +58,20 @@ namespace Lab_03
 	void MainForm::DrawTable()
 	{
 		// Calculating x_scale
-		float x_max = table->x[0];
+		float x_max = fabs(table->x[0]);
 		for (int i = 0; i < pointDataGrid->RowCount - 1; i++)
 		{
-			float x = table->x[i];
+			float x = fabs(table->x[i]);
 			if (x > x_max)
 				x_max = x;
 		}
 		x_scale = drawingCanvas->Width / 2 / x_max;
 
 		// Calculating y_scale
-		float y_max = table->y[0];
+		float y_max = fabs(table->y[0]);
 		for (int i = 0; i < pointDataGrid->RowCount - 1; i++)
 		{
-			float y = table->y[i];
+			float y = fabs(table->y[i]);
 			if (y > y_max)
 				y_max = y;
 		}
@@ -88,6 +87,27 @@ namespace Lab_03
 			float x = (table->x[i] * x_scale);
 			float y = (table->y[i] * y_scale);
 			gr->FillEllipse(pointBrush, x - POINT_SIZE / 2, -y - POINT_SIZE / 2, (float)POINT_SIZE, (float)POINT_SIZE);
+		}
+	}
+
+	void MainForm::draw_graphics()
+	{
+
+		int degree = Int32::Parse(degreeBox->Text);
+		OlsInterpolator *ols = new OlsInterpolator(table, fi, degree);
+		Graphics^ gr = drawingCanvas->CreateGraphics();
+		gr->TranslateTransform(drawingCanvas->Width / 2, drawingCanvas->Height / 2);
+		int x_prev = - drawingCanvas->Width / 2;
+		int y_prev = ols->calculate(x_prev);
+
+		Brush^ pointBrush = gcnew SolidBrush(Color::Black);
+		Pen^ pen = gcnew Pen(pointBrush);
+
+		
+		for (int x = -drawingCanvas->Width / 2 + 10; x < drawingCanvas->Width / 2; x += 10)
+		{
+			int y = ols->calculate(x);
+			gr->DrawLine(pen, x_prev, y_prev, x, y);
 		}
 	}
 
@@ -108,7 +128,7 @@ namespace Lab_03
 			{
 				float x = (init_arg + (i * arg_step));
 				float y = genFunc(x);
-				float pnt = RND_RANGE(y - Y_INTERFERENCE, y + Y_INTERFERENCE);
+				float pnt = y + rnd->NextDouble() * (2 * Y_INTERFERENCE) - Y_INTERFERENCE;
 				array<String^>^row1 = gcnew array<String^>
 				{
 					i.ToString(), "1",  x.ToString(), pnt.ToString()
@@ -129,6 +149,7 @@ namespace Lab_03
 		{
 			ConstructTable();
 			DrawTable();
+			draw_graphics();
 		}
 		else
 		if (sendingButton == genButton)

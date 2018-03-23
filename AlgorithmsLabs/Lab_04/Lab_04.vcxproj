@@ -87,19 +87,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="OlsInterpolator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="table.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="OlsInterpolator.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="table.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

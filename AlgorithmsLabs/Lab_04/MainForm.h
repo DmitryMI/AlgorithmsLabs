@@ -1,17 +1,10 @@
 #pragma once
 
 #include <stdlib.h>
+#include "table.h"
 
 namespace Lab_03
 {
-
-	typedef struct Table
-	{
-		float *x;
-		float *y;
-		float *weight;
-	};	
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -59,6 +52,9 @@ namespace Lab_03
 	private: System::Windows::Forms::TextBox^  argstepBox;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::TextBox^  initargBox;
+	private: System::Windows::Forms::TextBox^  degreeBox;
+	private: System::Windows::Forms::Label^  label4;
+
 
 
 
@@ -82,10 +78,10 @@ namespace Lab_03
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle9 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle10 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->drawingCanvas = (gcnew System::Windows::Forms::PictureBox());
 			this->pointDataGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->indexCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -100,6 +96,8 @@ namespace Lab_03
 			this->argstepBox = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->initargBox = (gcnew System::Windows::Forms::TextBox());
+			this->degreeBox = (gcnew System::Windows::Forms::TextBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->drawingCanvas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pointDataGrid))->BeginInit();
 			this->SuspendLayout();
@@ -123,13 +121,13 @@ namespace Lab_03
 			});
 			this->pointDataGrid->Location = System::Drawing::Point(12, 12);
 			this->pointDataGrid->Name = L"pointDataGrid";
-			this->pointDataGrid->Size = System::Drawing::Size(416, 409);
+			this->pointDataGrid->Size = System::Drawing::Size(416, 352);
 			this->pointDataGrid->TabIndex = 1;
 			// 
 			// indexCol
 			// 
-			dataGridViewCellStyle9->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->indexCol->DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->indexCol->DefaultCellStyle = dataGridViewCellStyle5;
 			this->indexCol->HeaderText = L"#";
 			this->indexCol->Name = L"indexCol";
 			this->indexCol->ReadOnly = true;
@@ -137,30 +135,30 @@ namespace Lab_03
 			// 
 			// weightCol
 			// 
-			dataGridViewCellStyle10->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->weightCol->DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->weightCol->DefaultCellStyle = dataGridViewCellStyle6;
 			this->weightCol->HeaderText = L"Weight";
 			this->weightCol->Name = L"weightCol";
 			// 
 			// xCol
 			// 
-			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->xCol->DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->xCol->DefaultCellStyle = dataGridViewCellStyle7;
 			this->xCol->HeaderText = L"X";
 			this->xCol->Name = L"xCol";
 			// 
 			// yCol
 			// 
-			dataGridViewCellStyle12->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->yCol->DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle8->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->yCol->DefaultCellStyle = dataGridViewCellStyle8;
 			this->yCol->HeaderText = L"Y";
 			this->yCol->Name = L"yCol";
 			// 
 			// drawButton
 			// 
-			this->drawButton->Location = System::Drawing::Point(13, 436);
+			this->drawButton->Location = System::Drawing::Point(12, 389);
 			this->drawButton->Name = L"drawButton";
-			this->drawButton->Size = System::Drawing::Size(75, 23);
+			this->drawButton->Size = System::Drawing::Size(93, 23);
 			this->drawButton->TabIndex = 2;
 			this->drawButton->Text = L"Draw curve";
 			this->drawButton->UseVisualStyleBackColor = true;
@@ -168,7 +166,7 @@ namespace Lab_03
 			// 
 			// genButton
 			// 
-			this->genButton->Location = System::Drawing::Point(94, 436);
+			this->genButton->Location = System::Drawing::Point(12, 436);
 			this->genButton->Name = L"genButton";
 			this->genButton->Size = System::Drawing::Size(93, 23);
 			this->genButton->TabIndex = 3;
@@ -178,7 +176,7 @@ namespace Lab_03
 			// 
 			// numBox
 			// 
-			this->numBox->Location = System::Drawing::Point(193, 438);
+			this->numBox->Location = System::Drawing::Point(111, 438);
 			this->numBox->Name = L"numBox";
 			this->numBox->Size = System::Drawing::Size(68, 20);
 			this->numBox->TabIndex = 4;
@@ -187,7 +185,7 @@ namespace Lab_03
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(192, 424);
+			this->label1->Location = System::Drawing::Point(110, 424);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(69, 13);
 			this->label1->TabIndex = 5;
@@ -196,7 +194,7 @@ namespace Lab_03
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(266, 424);
+			this->label2->Location = System::Drawing::Point(184, 424);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(46, 13);
 			this->label2->TabIndex = 7;
@@ -204,7 +202,7 @@ namespace Lab_03
 			// 
 			// argstepBox
 			// 
-			this->argstepBox->Location = System::Drawing::Point(267, 438);
+			this->argstepBox->Location = System::Drawing::Point(185, 438);
 			this->argstepBox->Name = L"argstepBox";
 			this->argstepBox->Size = System::Drawing::Size(68, 20);
 			this->argstepBox->TabIndex = 6;
@@ -213,7 +211,7 @@ namespace Lab_03
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(340, 424);
+			this->label3->Location = System::Drawing::Point(258, 424);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(39, 13);
 			this->label3->TabIndex = 9;
@@ -221,17 +219,35 @@ namespace Lab_03
 			// 
 			// initargBox
 			// 
-			this->initargBox->Location = System::Drawing::Point(341, 438);
+			this->initargBox->Location = System::Drawing::Point(259, 438);
 			this->initargBox->Name = L"initargBox";
 			this->initargBox->Size = System::Drawing::Size(68, 20);
 			this->initargBox->TabIndex = 8;
-			this->initargBox->Text = L"0";
+			this->initargBox->Text = L"-5";
+			// 
+			// degreeBox
+			// 
+			this->degreeBox->Location = System::Drawing::Point(113, 391);
+			this->degreeBox->Name = L"degreeBox";
+			this->degreeBox->Size = System::Drawing::Size(66, 20);
+			this->degreeBox->TabIndex = 10;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(110, 375);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(42, 13);
+			this->label4->TabIndex = 11;
+			this->label4->Text = L"Degree";
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(917, 472);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->degreeBox);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->initargBox);
 			this->Controls->Add(this->label2);
@@ -257,13 +273,15 @@ namespace Lab_03
 		void GeneratePoints();
 		void DrawTable();
 		void ConstructTable();
-		void free_table(Table *t);
+		void draw_graphics();
 
 	private:
 		float x_scale, y_scale;
 		Table *table;
+		Random^ rnd = gcnew Random();
 
 #pragma endregion
-	};
+
+};
 }
 

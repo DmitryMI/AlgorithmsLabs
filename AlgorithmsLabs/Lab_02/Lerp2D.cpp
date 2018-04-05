@@ -4,12 +4,12 @@
 #include "../Lab_01/Lerp.h"
 #include "../Lab_01/NeutonPolinom.h"
 
-double Lerp2D(Table table, double x, double y, int nx, int ny)
+double Lerp2D(Table *table, double x, double y, int nx, int ny)
 {
-	int size = table.get_size();
+	int size = table->get_size();
 
-	double *x_args = table.get_x_args();
-	double *y_args = table.get_y_args();
+	double *x_args = table->get_x_args();
+	double *y_args = table->get_y_args();
 	double *y_nearest = (double*)malloc(sizeof(double)* (ny + 1));
 	double *x_nearest = (double*)malloc(sizeof(double)* (nx + 1));
 	double *z_interpol = (double*)malloc(sizeof(double)* (ny + 1));
@@ -77,7 +77,7 @@ double Lerp2D(Table table, double x, double y, int nx, int ny)
 	{
 		for (int j = 0; j < nx + 1; j++)
 		{
-			z_vals[j] = table.GetZ(x_nearest[j], y_nearest[i]);
+			z_vals[j] = table->GetZ(x_nearest[j], y_nearest[i]);
 		}
 		NeutonPolinom polinom = NeutonPolinom(nx, x_nearest, z_vals);
 		z_interpol[i] = polinom.Calculate(x);

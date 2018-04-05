@@ -17,9 +17,9 @@ double f(double x, double y)
 
 int main(void)
 {
-	Table table = Table(TABLE_SIZE);
-	table.GenerateTable(f, INIT_ARG, INIT_ARG, ARG_STEP);
-	table.PrintTable();
+	Table *table = new Table(TABLE_SIZE);
+	table->GenerateTable(f, INIT_ARG, INIT_ARG, ARG_STEP);
+	table->PrintTable();
 
 	int nX, nY;
 	double x, y;

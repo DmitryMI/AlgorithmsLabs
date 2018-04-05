@@ -27,15 +27,20 @@ namespace Lab_03
 	
 	void MainForm::ConstructTable()
 	{
-		free_table(table);
-		table = NULL;
+		//free_table(table);
+		//table = NULL;
 		if (pointDataGrid->RowCount <= 0)
 			return;
-		table = (Table*)malloc(sizeof(Table));
+		/*table = (Table*)malloc(sizeof(Table));
 		table->x = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
 		table->y = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
-		table->weight = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));
-		table->size = (pointDataGrid->RowCount - 1);
+		table->weight = (float*)malloc(sizeof(float)* (pointDataGrid->RowCount - 1));*/
+		int size = pointDataGrid->RowCount - 1;
+		table = new Table();
+		table->x = new float[size];
+		table->y = new float[size];
+		table->weight = new float[size];
+		table->size = size;
 		try
 		{
 			for (int i = 0; i < pointDataGrid->RowCount - 1; i++)
@@ -52,6 +57,8 @@ namespace Lab_03
 		{
 			MessageBox::Show("Incorrect format of table value");
 		}
+
+		//free_table(table);
 		
 	}
 

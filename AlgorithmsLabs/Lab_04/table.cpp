@@ -8,9 +8,9 @@ namespace Lab_03
 	{
 		if (t == NULL)
 			return;
-		free(t->x);
-		free(t->y);
-		free(t->weight);
-		free(t);
+		delete t->x;
+		delete t->y;
+		delete t->weight;
+		delete t;
 	}
 }

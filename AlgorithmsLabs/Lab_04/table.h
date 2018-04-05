@@ -1,8 +1,9 @@
 #pragma once
 namespace Lab_03
 {
-	typedef struct Table
+	class Table
 	{
+	public:
 		float *x;
 		float *y;
 		float *weight;

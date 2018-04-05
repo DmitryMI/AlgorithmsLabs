@@ -277,7 +277,7 @@ namespace Lab_03
 
 	private:
 		float x_scale, y_scale;
-		Table *table;
+		Table *table = NULL;
 		Random^ rnd = gcnew Random();
 
 #pragma endregion

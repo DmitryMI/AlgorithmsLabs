@@ -7,6 +7,14 @@
 namespace Lab_03
 {
 
+	OlsInterpolator::~OlsInterpolator()
+	{
+		delete matrix;
+		delete col;
+		free_table(table);
+		delete A;
+	}
+
 
 	void OlsInterpolator::get_slau_matrix()
 	{
@@ -63,7 +71,7 @@ namespace Lab_03
 
 	double *OlsInterpolator::calculate(double start_x, double end_x, double step)
 	{
-		double *y = new double[(int)(end_x - start_x)];
+		double *y = new double[(int)(end_x - start_x) + 1];
 		int index = 0;
 		for (double i = start_x; i <= end_x; i += step, index++)
 		{

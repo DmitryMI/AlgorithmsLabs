@@ -20,8 +20,8 @@ namespace Lab_03
 		void get_slau_matrix();
 	public:
 		OlsInterpolator(Table *table, func fi, int degree);
-		~OlsInterpolator();
 		double *calculate(double start_x, double end_x, double step);
+		~OlsInterpolator();
 
 	};
 }

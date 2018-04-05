@@ -111,13 +111,14 @@ namespace Lab_03
 		{
 			float x_res = x * scale_x;
 			float y_res = (float)(y[i] * scale_y);
-			//gr->FillRectangle(pointBrush, x_res, -y_res, 1.0f, 1.0f);
 			if (i > 0)
 				gr->DrawLine(pen, x_prev, -y_prev, x_res, -y_res);
 			x_prev = x_res;
 			y_prev = y_res;
 			i++;
 		}
+		delete[] y;
+		delete ols;
 	}
 
 	void MainForm::GeneratePoints()

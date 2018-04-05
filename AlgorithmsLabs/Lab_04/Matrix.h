@@ -33,6 +33,7 @@ namespace Lab_03
 
 		static Matrix *summ(const Matrix& a, const Matrix& b);
 
+		void print();
 
 	};
 }

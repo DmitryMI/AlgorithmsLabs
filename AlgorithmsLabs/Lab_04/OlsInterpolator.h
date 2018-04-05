@@ -11,14 +11,17 @@ namespace Lab_03
 	{
 	private:
 		Table *table;
-		Matrix *bettas;
-		int degree;
+		Matrix *matrix;
+		Matrix *col;
+		int n;
 		func fi;
+		Matrix *A;
 
+		void get_slau_matrix();
 	public:
 		OlsInterpolator(Table *table, func fi, int degree);
 		~OlsInterpolator();
-		double calculate(double x);
+		double *calculate(double start_x, double end_x, double step);
 
 	};
 }

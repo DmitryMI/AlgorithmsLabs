@@ -2,43 +2,76 @@
 #include "OlsInterpolator.h"
 #include "Matrix.h"
 #include "table.h"
+#include <stdio.h>
 
 namespace Lab_03
 {
-	OlsInterpolator::OlsInterpolator(Table *table, func fi, int degree)
+
+
+	void OlsInterpolator::get_slau_matrix()
 	{
-		this->fi = fi;
-		bettas = new Matrix(degree + 1, 1); // Unknown vector
-		int point_amount = table->size;
-		Matrix *f_mat = new Matrix(point_amount, degree + 1);
+		int N = table->size;
 
-		// Filling matrix of values
-		for (int i = 0; i < point_amount; i++)
-		for (int j = 0; j < degree + 1; j++)
+		// Empty matrix
+		matrix = new Matrix(n + 1, n + 1);
+
+		// Empty column
+		col = new Matrix(1, n + 1);
+
+		for (int m = 0; m < n + 1; m++)
 		{
-			double fi_k_x = fi(table->x[i], j);
-			f_mat->setVal(i, j, fi_k_x);
+			for (int i = 0; i < N; i++)
+			{
+				double tmp = table->weight[i] * fi(table->x[i], m);
+				for (int k = 0; k < n + 1; k++)
+				{
+					double val = table->weight[i] * fi(table->x[i], k);
+					double mval = matrix->getVal(m, k);
+					mval += tmp * fi(table->x[i], k);
+					matrix->setVal(m, k, mval);
+					//matrix->setVal(m, k, matrix->getVal(m, k) + tmp * val);
+				}
+				double cval = col->getVal(0, m);
+				cval += tmp * table->y[i];
+				col->setVal(0, m, cval);
+				//col->setVal(m, 0, col->getVal(m, 0) + tmp * table->y[i]);
+			}
 		}
-
-		// Filling vector of y values
-		Matrix yVec = Matrix(point_amount, 1);
-		for (int i = 0; i < point_amount; i++)
-			yVec.setVal(i, 0, table->y[i]);
-
-		Matrix *t_fmat = f_mat->transposed();
-		Matrix *ftf = Matrix::prod(*t_fmat, *f_mat);
-		Matrix *ftf_inv = ftf->inversed();
-		Matrix *ftf_inv_ft = Matrix::prod(*ftf_inv, *t_fmat);
-		bettas = Matrix::prod(*ftf_inv_ft, yVec);
 	}
 
-	double OlsInterpolator::calculate(double x)
+	Matrix* solve(Matrix *mat_a, Matrix *z)
 	{
-		double res = 0;
-		for (int i = 0; i < degree; i++)
+		mat_a->print();
+		Matrix *inv = mat_a->inversed();
+		//inv->print();
+		Matrix *c = Matrix::prod(*z, *inv);
+		c->print();
+		return c;
+	}
+
+	
+	OlsInterpolator::OlsInterpolator(Table *table, func fi, int degree)
+	{
+		this->table = table;
+		this->fi = fi;
+		this->n = degree;
+		
+		get_slau_matrix();
+		A = solve(matrix, col);	
+		A->print();
+	}
+
+	double *OlsInterpolator::calculate(double start_x, double end_x, double step)
+	{
+		double *y = new double[(int)(end_x - start_x)];
+		int index = 0;
+		for (double i = start_x; i <= end_x; i += step, index++)
 		{
-			res += bettas->getVal(i, 0) * fi(x, i);
+			double tmp = 0;
+			for (int j = 0; j < n + 1; j++)
+				tmp += fi(i, j) * A->getVal(0, j);
+			y[index] = tmp;
 		}
-		return res;
+		return y;
 	}
 }

@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Matrix.h"
+#include <stdio.h>
 #include <cmath>
+#include <fstream>
+
+using namespace System::Windows::Forms;
 
 namespace Lab_03
 {
@@ -28,6 +32,8 @@ namespace Lab_03
 		for (int i = 0; i < rows; i++)
 		{
 			data[i] = new double[cols];
+			for (int j = 0; j < cols; j++)
+				data[i][j] = 0;
 		}
 		this->rows = rows;
 		this->cols = cols;
@@ -78,7 +84,9 @@ namespace Lab_03
 
 	Matrix* Matrix::prod(const Matrix& a, const Matrix& b)
 	{
-		Matrix *m = new Matrix(a.cols, b.rows);
+		if (a.cols != b.rows)
+			throw new std::exception();
+		Matrix *m = new Matrix(a.rows, b.cols);
 		for (int i = 0; i < m->rows; i++)
 		for (int j = 0; j < m->cols; j++)
 		{
@@ -115,9 +123,14 @@ namespace Lab_03
 	Matrix *Matrix::transposed()
 	{
 		Matrix *tran = new Matrix(rows, cols);
-		for (int i = 0; i < rows; i ++)
-		for (int j = 0; j < cols; j++)
-			tran->data[i][j] = data[j][i];
+		for (int i = 0; i < rows; ++i)
+		{
+			for (int j = i; j < cols; ++j)
+			{
+				tran->data[i][j] = data[j][i];
+				tran->data[j][i] = data[i][j];
+			}
+		}
 		return tran;
 	}
 
@@ -156,6 +169,7 @@ namespace Lab_03
 				result += m.data[0][i] * RecursiveDeterminant(*exc);
 			else
 				result -= m.data[0][i] * RecursiveDeterminant(*exc);
+			exc->~Matrix();
 		}
 		return result;
 	}
@@ -169,6 +183,7 @@ namespace Lab_03
 	{
 		Matrix *inv = new Matrix(cols, rows);
 		Matrix *tinv;
+		this->print();
 		double det = Determinant();
 		if (det)
 		{
@@ -176,14 +191,32 @@ namespace Lab_03
 			for (int j = 0; j < cols; j++)
 			{
 				int m = rows - 1;
-				Matrix *tmp = ExcludeRowCol(*this, m, m);
+				Matrix *tmp = ExcludeRowCol(*this, i, j);
 				inv->data[i][j] = pow(-1.0, i + j + 2) * tmp->Determinant() / det;
 				tmp->~Matrix();
 			}
+			inv->print();
 			tinv = inv->transposed();
+			tinv->print();
 			inv->~Matrix();
 			return tinv;
 		}
 		return nullptr;
+	}
+
+	void Matrix::print()
+	{
+		std::ofstream fout;
+		fout.open("log.txt");
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				fout << data[i][j];
+				fout << " ";
+			}
+			fout << std::endl;
+		}
+		fout.close();
 	}
 }

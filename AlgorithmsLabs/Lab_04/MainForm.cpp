@@ -7,7 +7,7 @@
 
 #define POINT_SIZE 4
 #define POINT_COLOR Color::Red
-#define Y_INTERFERENCE 0
+#define Y_INTERFERENCE 5
 
 namespace Lab_03
 {	
@@ -22,6 +22,7 @@ namespace Lab_03
 
 	float genFunc(float x)
 	{
+		x += 5;
 		return x * x;
 	}
 	
@@ -109,7 +110,7 @@ namespace Lab_03
 		Brush^ pointBrush = gcnew SolidBrush(Color::Black);
 		Pen^ pen = gcnew Pen(pointBrush);
 
-		double step = table->x[1] - table->x[0];
+		double step = (table->x[1] - table->x[0]) / 2;
 		double *y = ols->calculate(table->x[0], table->x[table->size - 1], step);
 
 		float x_prev, y_prev;
@@ -124,7 +125,7 @@ namespace Lab_03
 			y_prev = y_res;
 			i++;
 		}
-		delete[] y;
+		//delete[] y;
 		delete ols;
 	}
 

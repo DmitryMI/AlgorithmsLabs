@@ -105,22 +105,25 @@ namespace Lab_03
 			// drawingCanvas
 			// 
 			this->drawingCanvas->BackColor = System::Drawing::Color::White;
-			this->drawingCanvas->Location = System::Drawing::Point(434, 12);
+			this->drawingCanvas->Location = System::Drawing::Point(651, 18);
+			this->drawingCanvas->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->drawingCanvas->Name = L"drawingCanvas";
-			this->drawingCanvas->Size = System::Drawing::Size(471, 448);
+			this->drawingCanvas->Size = System::Drawing::Size(706, 689);
 			this->drawingCanvas->TabIndex = 0;
 			this->drawingCanvas->TabStop = false;
 			// 
 			// pointDataGrid
 			// 
 			this->pointDataGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->pointDataGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			this->pointDataGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
+			{
 				this->indexCol,
 					this->weightCol, this->xCol, this->yCol
 			});
-			this->pointDataGrid->Location = System::Drawing::Point(12, 12);
+			this->pointDataGrid->Location = System::Drawing::Point(18, 18);
+			this->pointDataGrid->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->pointDataGrid->Name = L"pointDataGrid";
-			this->pointDataGrid->Size = System::Drawing::Size(416, 352);
+			this->pointDataGrid->Size = System::Drawing::Size(624, 542);
 			this->pointDataGrid->TabIndex = 1;
 			// 
 			// indexCol
@@ -155,9 +158,10 @@ namespace Lab_03
 			// 
 			// drawButton
 			// 
-			this->drawButton->Location = System::Drawing::Point(12, 389);
+			this->drawButton->Location = System::Drawing::Point(18, 598);
+			this->drawButton->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->drawButton->Name = L"drawButton";
-			this->drawButton->Size = System::Drawing::Size(93, 23);
+			this->drawButton->Size = System::Drawing::Size(140, 35);
 			this->drawButton->TabIndex = 2;
 			this->drawButton->Text = L"Draw curve";
 			this->drawButton->UseVisualStyleBackColor = true;
@@ -165,9 +169,10 @@ namespace Lab_03
 			// 
 			// genButton
 			// 
-			this->genButton->Location = System::Drawing::Point(12, 436);
+			this->genButton->Location = System::Drawing::Point(18, 671);
+			this->genButton->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->genButton->Name = L"genButton";
-			this->genButton->Size = System::Drawing::Size(93, 23);
+			this->genButton->Size = System::Drawing::Size(140, 35);
 			this->genButton->TabIndex = 3;
 			this->genButton->Text = L"Generate points";
 			this->genButton->UseVisualStyleBackColor = true;
@@ -175,77 +180,85 @@ namespace Lab_03
 			// 
 			// numBox
 			// 
-			this->numBox->Location = System::Drawing::Point(111, 438);
+			this->numBox->Location = System::Drawing::Point(166, 674);
+			this->numBox->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->numBox->Name = L"numBox";
-			this->numBox->Size = System::Drawing::Size(68, 20);
+			this->numBox->Size = System::Drawing::Size(100, 26);
 			this->numBox->TabIndex = 4;
 			this->numBox->Text = L"10";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(110, 424);
+			this->label1->Location = System::Drawing::Point(165, 652);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(69, 13);
+			this->label1->Size = System::Drawing::Size(103, 20);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"Point number";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(184, 424);
+			this->label2->Location = System::Drawing::Point(276, 652);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(46, 13);
+			this->label2->Size = System::Drawing::Size(69, 20);
 			this->label2->TabIndex = 7;
 			this->label2->Text = L"Arg step";
 			// 
 			// argstepBox
 			// 
-			this->argstepBox->Location = System::Drawing::Point(185, 438);
+			this->argstepBox->Location = System::Drawing::Point(278, 674);
+			this->argstepBox->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->argstepBox->Name = L"argstepBox";
-			this->argstepBox->Size = System::Drawing::Size(68, 20);
+			this->argstepBox->Size = System::Drawing::Size(100, 26);
 			this->argstepBox->TabIndex = 6;
 			this->argstepBox->Text = L"1";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(258, 424);
+			this->label3->Location = System::Drawing::Point(387, 652);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(39, 13);
+			this->label3->Size = System::Drawing::Size(58, 20);
 			this->label3->TabIndex = 9;
 			this->label3->Text = L"Init arg";
 			// 
 			// initargBox
 			// 
-			this->initargBox->Location = System::Drawing::Point(259, 438);
+			this->initargBox->Location = System::Drawing::Point(388, 674);
+			this->initargBox->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->initargBox->Name = L"initargBox";
-			this->initargBox->Size = System::Drawing::Size(68, 20);
+			this->initargBox->Size = System::Drawing::Size(100, 26);
 			this->initargBox->TabIndex = 8;
-			this->initargBox->Text = L"2";
+			this->initargBox->Text = L"-5";
 			// 
 			// degreeBox
 			// 
-			this->degreeBox->Location = System::Drawing::Point(113, 391);
+			this->degreeBox->Location = System::Drawing::Point(170, 602);
+			this->degreeBox->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->degreeBox->Name = L"degreeBox";
-			this->degreeBox->Size = System::Drawing::Size(66, 20);
+			this->degreeBox->Size = System::Drawing::Size(97, 26);
 			this->degreeBox->TabIndex = 10;
 			this->degreeBox->Text = L"1";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(110, 375);
+			this->label4->Location = System::Drawing::Point(165, 577);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(42, 13);
+			this->label4->Size = System::Drawing::Size(62, 20);
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"Degree";
 			// 
 			// MainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(917, 472);
+			this->ClientSize = System::Drawing::Size(1376, 726);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->degreeBox);
 			this->Controls->Add(this->label3);
@@ -258,6 +271,7 @@ namespace Lab_03
 			this->Controls->Add(this->drawButton);
 			this->Controls->Add(this->pointDataGrid);
 			this->Controls->Add(this->drawingCanvas);
+			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->Name = L"MainForm";
 			this->Text = L"OLS";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->drawingCanvas))->EndInit();

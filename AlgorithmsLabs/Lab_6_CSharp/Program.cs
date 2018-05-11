@@ -39,7 +39,7 @@ namespace Lab_6_CSharp
             double alpha;
             int degree;
 
-            Console.Write("State the alpha parametr: ");
+            Console.Write("State the alpha parameter: ");
             //cin >> alpha;
             alpha = Double.Parse(Console.ReadLine());
             Console.Write("State the degree of Legendre polinom: ");

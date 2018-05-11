@@ -15,6 +15,7 @@ namespace Lab_6_CSharp
         public const double RelativeAccuracy = 1e-6;
         private Function _func;
         private FunctionPrimitive _primitiveFunction;
+
         private static List<double> PoliLegendre(int n, double x)
         {
             var result = new List<double>();
@@ -24,7 +25,7 @@ namespace Lab_6_CSharp
             // Используем рекурсивную формулу для построения полинома Лежандра
             for (int i = 2; i < n + 1; i++)
             {
-                double buff = (2 * i - 1) * x * result[i - 1] - (i - 1) * result[i - 2];
+                double buff = (2.0f * i - 1) * x * result[i - 1] - (i - 1.0f) * result[i - 2];
                 buff /= i;
                 result.Add(buff);
             }
@@ -33,7 +34,7 @@ namespace Lab_6_CSharp
 
         private static double DerPoliLegendre(int n, List<double> poli, double x)
         {
-            return n / (1 - x * x) * (poli[n - 1] - x * poli[n]);
+            return (float)n / (1.0f - x * x) * (poli[n - 1] - x * poli[n]);
         }
 
         public static void GetRoots(List<double> x, List<double> poli, List<double> polider, int n)
@@ -58,6 +59,29 @@ namespace Lab_6_CSharp
                         break;
                 }
                 poli.AddRange(tmpPoli);
+                //polider.Add(tmpDer);
+            }
+
+            int len = x.Count;
+            for (int i = 0; i < len; i++)
+            {
+                if (x[i] < 0)
+                    x[i] = -x[i];
+            }
+
+            x.Sort();
+            for (int i = 0; i < len - 1; i++)
+            {
+                if (Math.Abs(x[i] - x[i + 1]) < RelativeAccuracy)
+                    x[i] = -x[i];
+            }
+            x.Sort();
+
+            polider.Clear();
+            for(int i = 0; i < n; i++)
+            {
+                var tmpPoli = PoliLegendre(n, x[i]);
+                double tmpDer = DerPoliLegendre(n, tmpPoli, x[i]);
                 polider.Add(tmpDer);
             }
         }
@@ -77,7 +101,7 @@ namespace Lab_6_CSharp
                 down = tmp;
             }
 
-            if(_func(down, alpha, t, w, _primitiveFunction) > 0)
+            if (_func(down, alpha, t, w, _primitiveFunction) > 0)
                 throw new ArgumentException();
 
             double buffer = 0;
@@ -96,7 +120,7 @@ namespace Lab_6_CSharp
                 else
                     up = buffer;
 
-                index++;
+                //index++;
             }
             return buffer;
         }

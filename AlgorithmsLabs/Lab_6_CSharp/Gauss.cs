@@ -18,7 +18,7 @@ namespace Lab_6_CSharp
             List<double> result = new List<double>();
             for (int i = 0; i < n; i++)
             {
-                double tmp = 2.0f / (1 - x[i] * x[i]) / (ders[i] * ders[i]);
+                double tmp = 2.0f / (1.0f - x[i] * x[i]) / (ders[i] * ders[i]);
                 result.Add(tmp);
             }
             return result;

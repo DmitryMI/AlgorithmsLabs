@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab_01", "Lab_01\Lab_01.vcxproj", "{92DEEDA2-B5AC-4A2D-BB1D-5C1EDAE349A6}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_6_CSharp", "Lab_6_CSharp\Lab_6_CSharp.csproj", "{1EBFBCA5-620A-46AF-BC6E-DA55739E4023}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_7", "Lab_7\Lab_7.csproj", "{5C013337-D98B-4378-9A7A-4AFFD437C01C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_5_CSharp", "Lab_5_CSharp\Lab_5_CSharp.csproj", "{01C50F86-696A-40A7-895C-01762CB75588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,8 +111,23 @@ Global
 		{5C013337-D98B-4378-9A7A-4AFFD437C01C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5C013337-D98B-4378-9A7A-4AFFD437C01C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5C013337-D98B-4378-9A7A-4AFFD437C01C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Debug|Win32.Build.0 = Debug|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Win32.ActiveCfg = Release|Any CPU
+		{01C50F86-696A-40A7-895C-01762CB75588}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A39FA3B-B21B-4127-9DAE-53E5C9CCB866}
 	EndGlobalSection
 EndGlobal

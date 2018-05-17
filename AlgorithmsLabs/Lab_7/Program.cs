@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_7
+namespace algorithms_6
 {
     class Program
     {
 
         const int INF = 1000000;
 
+        const int a_0 = 4;
+
+        const int a_1 = 3;
+
+        const int a_2 = 7;
+
+
+
         static double F(double x)
         {
-            return Math.Exp(x);
+            return (a_0 * x) / (a_1 * x + a_2);
         }
 
         static double FLog(double x)
@@ -140,21 +148,30 @@ namespace Lab_7
         }
 
 
-        //Выравнивающие переменные (для экспоненты)
+        //Выравнивающие переменные 
         static double[,] Alignment(double[,] table, int N)
         {
             double[,] newtab = new double[N, 4];
             for (int i = 0; i < N; i++)
             {
-                newtab[i, 0] = table[i, 0];
-                newtab[i, 1] = FLog(table[i, 1]);
+                newtab[i, 0] = 1 / table[i, 0];
+                newtab[i, 1] = 1 / (table[i, 1]);
             }
             newtab = CentralDiff(newtab, N);
             table[0, 6] = INF;
             for (int i = 1; i < N - 1; i++)
             {
                 if (table[i, 0] != 0)
-                    table[i, 6] = newtab[i, 3] * table[i, 1];
+                {
+                    double Ksi = 1 / table[i, 0];
+                    Ksi = -Ksi * Ksi;
+
+                    double Etta = 1 / table[i, 1];
+                    Etta = -Etta * Etta;
+
+                    table[i, 6] = (newtab[i, 3]) * Ksi / Etta;
+
+                }
                 else
                     table[i, 6] = INF;
             }
@@ -257,8 +274,8 @@ namespace Lab_7
 
         static void Main(string[] args)
         {
-            double a = 0.0;
-            double b = 3.2;
+            double a = 1;
+            double b = 4.2;
             int N = 16;
             double[,] table = TableGenerate(a, b, N);
             table = OneSideDiff(table, N);//одностороняяя
@@ -271,24 +288,25 @@ namespace Lab_7
             Console.Write("----------------------------------------------------------------------------------------------------------\n");
             print_matrix(table);
 
-            Console.Write("\nInput number of nodes: ");
-            int n = Convert.ToInt32(Console.ReadLine());
+            /*Console.Write("\nInput number of nodes: ");
+            int n= Convert.ToInt32(Console.ReadLine());
             Console.Write("Input X: ");
-            double X = Convert.ToDouble(Console.ReadLine().Replace(".", ","));
-
-            double[,] razdraznTab = new double[n, n + 2];
-            table = NewTable(X, table, razdraznTab, n, N);
-            table = RazdRazn(razdraznTab, n - 1, X);
+            double X=Convert.ToDouble(Console.ReadLine().Replace(".", ","));
+	        
+            double [,]razdraznTab = new double[n,n+2];
+            table = NewTable(X,table,razdraznTab,n, N);
+            table = RazdRazn(razdraznTab, n-1, X);
 
             Console.Write("X\t\tY\t\t");
-            for (int i = 0; i < n - 1; i++)
-                Console.Write("\t\t");
+            for (int i = 0; i < n-1; i++)
+                Console.Write("\t\t");        
             Console.Write("X-xi\n");
-
+  	        
             print_matrix(razdraznTab);
             Console.Write("------------------------------\nY'({0}) = ", X);
             double answ = Polinom(razdraznTab, n);
             Console.Write("= {1:0.######}", X, answ);
+             */
             Console.ReadKey();
         }
 

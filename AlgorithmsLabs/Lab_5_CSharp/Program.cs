@@ -32,13 +32,18 @@ namespace Lab_5_CSharp
             try
             {
                 Console.Write("State Pressure: ");
-                p = Int32.Parse(Console.ReadLine() ?? throw new ArgumentNullException());
+                p = Int32.Parse(Console.ReadLine());
                 Console.Write("State Temperature: ");
-                t = Int32.Parse(Console.ReadLine() ?? throw new ArgumentNullException());
+                t = Int32.Parse(Console.ReadLine());
             }
             catch (ArgumentNullException ex)
             {
                 Console.WriteLine("ERROR: Line can not be empty");
+                Exit(true);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Incorrect format");
                 Exit(true);
             }
 

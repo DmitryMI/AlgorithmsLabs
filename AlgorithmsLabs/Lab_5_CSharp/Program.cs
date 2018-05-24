@@ -44,7 +44,6 @@ namespace Lab_5_CSharp
 
             double
                 g = 0,
-                k = 1.38e-23,
                 ne = Math.Exp(-3.27),
                 n1 = 7.242e+3 * p / t - 2 * ne,
                 n2 = ne;

@@ -288,7 +288,7 @@ namespace algorithms_6
             Console.Write("----------------------------------------------------------------------------------------------------------\n");
             print_matrix(table);
 
-            /*Console.Write("\nInput number of nodes: ");
+            Console.Write("\nInput number of nodes: ");
             int n= Convert.ToInt32(Console.ReadLine());
             Console.Write("Input X: ");
             double X=Convert.ToDouble(Console.ReadLine().Replace(".", ","));
@@ -306,7 +306,7 @@ namespace algorithms_6
             Console.Write("------------------------------\nY'({0}) = ", X);
             double answ = Polinom(razdraznTab, n);
             Console.Write("= {1:0.######}", X, answ);
-             */
+             
             Console.ReadKey();
         }
 
